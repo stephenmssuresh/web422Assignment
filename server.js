@@ -12,6 +12,7 @@
 require('dotenv').config();
 const express = require("express");
 const cors = require("cors");
+const path = require('path');
 const app = express();
 const MoviesDB = require("./modules/moviesDB.js");
 const db = new MoviesDB();
