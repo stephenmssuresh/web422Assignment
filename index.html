@@ -26,8 +26,8 @@
 
     <title>Assignment 2</title>
   </head>
-
-  <body>
+  <!-- https://www.tutorialspoint.com/How-do-I-call-a-JavaScript-function-on-page-load#:~:text=The%20first%20approach%20for%20calling,the%20function%20from%20the%20JavaScript. -->
+  <body onload="loadData()">
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
@@ -83,13 +83,11 @@
               </tr>
             </thead>
             <!-- Table Body-->
-            <tbody>
-              
-            </tbody>
+            <tbody></tbody>
           </table>
 
           <!-- Table Navigation https://getbootstrap.com/docs/5.1/components/pagination -->
-          <nav aria-label="Page navigation example">
+          <nav aria-label="Page navigation example" id="paginationNav">
             <ul class="pagination">
               <li class="page-item">
                 <a class="page-link" href="#" aria-label="Previous">
@@ -97,7 +95,7 @@
                 </a>
               </li>
               <li class="page-item" id="pageNum">
-                <a class="page-link" href="#"></a>
+                <a class="page-link" href="#">1</a>
               </li>
               <li class="page-item">
                 <a class="page-link" href="#" aria-label="Next">
@@ -137,7 +135,10 @@
     </div>
 
     <div>
-      <button onclick="loadMovieData()">Click me</button>
+      <button onclick="loadData()">Click me</button>
     </div>
+    <!-- <div>
+      <button onclick="createRows();">Click me</button>
+    </div> -->
   </body>
 </html>
