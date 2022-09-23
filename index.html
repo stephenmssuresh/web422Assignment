@@ -27,7 +27,7 @@
     <title>Assignment 2</title>
   </head>
   <!-- https://www.tutorialspoint.com/How-do-I-call-a-JavaScript-function-on-page-load#:~:text=The%20first%20approach%20for%20calling,the%20function%20from%20the%20JavaScript. -->
-  <body onload="loadData()">
+  <body onload="loadMovieData()">
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
@@ -46,19 +46,20 @@
 
         <!-- https://stackoverflow.com/questions/23944331/align-bootstrap-3-navbar-right-and-include-search-box-also-right-aligned -->
         <!-- <div id="right"> -->
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <form class="d-flex" 6>
+          <!-- https://getbootstrap.com/docs/5.0/utilities/float/ -->
+        <div class="collapse navbar-collapse d-flex" id="navbarSupportedContent">
+          <form class="d-flex">
             <input
               class="form-control me-2"
               id="searchForm"
               type="search"
-              placeholder="Search"
+              placeholder="Title (case sensitive)"
               aria-label="Search"
             />
-            <button class="btn btn-outline-success" type="submit">
+            <button class="btn btn-outline-success me" type="submit" id="submitButton">
               Search
             </button>
-            <button class="btn btn-outline-danger" id="clearForm" type="button">
+            <button class="btn btn-outline-danger me"  type="button" id="clearForm">
               Clear
             </button>
           </form>
@@ -90,7 +91,7 @@
           <nav aria-label="Page navigation example" id="paginationNav">
             <ul class="pagination">
               <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
+                <a class="page-link" href="#" id="previousButton" aria-label="Previous">
                   <span aria-hidden="true">&laquo;</span>
                 </a>
               </li>
@@ -98,7 +99,7 @@
                 <a class="page-link" href="#">1</a>
               </li>
               <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
+                <a class="page-link" href="#" id="nextButton" aria-label="Next">
                   <span aria-hidden="true">&raquo;</span>
                 </a>
               </li>
@@ -133,12 +134,5 @@
         </div>
       </div>
     </div>
-
-    <div>
-      <button onclick="loadData()">Click me</button>
-    </div>
-    <!-- <div>
-      <button onclick="createRows();">Click me</button>
-    </div> -->
   </body>
 </html>

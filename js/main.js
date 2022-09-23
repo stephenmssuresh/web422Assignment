@@ -2,12 +2,14 @@ var page = 1;
 var perPage = 10;
 var movieArr = []; //empty array to store all the movies from the fetch
 
-function loadData(title = null) {
+function loadMovieData(title = null) {
   var paginationBar = document.querySelector("#paginationNav");
   var pageNumber = document.querySelector("#pageNum a");
   if (title) {
     paginationBar.classList.add("d-none");
+    page = 1;
   } else {
+    paginationBar.classList.remove("d-none");
     pageNumber.innerHTML = page;
   }
   let url = title
@@ -26,7 +28,7 @@ function loadData(title = null) {
             `<tr data-id=${movies._id}>
           <td>${movies.year}</td>
           <td>${movies.title}</td>
-          <td>${movies.plot}</td>
+          <td>${movies.plot ? movies.plot : 'N/A'}</td>
           <td>${movies.rated ? movies.rated : "N/A"}</td>
           <td>${minutesToTime(movies.runtime)}</td>
         </tr>`
@@ -55,19 +57,20 @@ function modalDisplay(movieJSON) {
   let modalData = `
   ${
     movieJSON.poster
-      ? `<div><img class="img-fluid w-100" src="${movieJSON.poster}"></div>`
-      : `<span></span>`
+      ? `<img class="img-fluid w-100" src="${movieJSON.poster}"><br><br>`
+      : ``
   }
-  <p><strong>Directed By:</strong> ${movieJSON.directors
-    .map((dir) => `<span>${dir}</span>`)
-    .join(" ")}</p>
-  <p><strong>Cast:</strong> ${movieJSON.cast
-    .map((cas) => `<span>${cas}</span>`)
-    .join(", ")}</p>
-  <p><strong>Awards:</strong> ${movieJSON.awards.text}</p>
-  <p><strong>IMDB Rating:</strong> ${movieJSON.imdb.rating} (${
+  <strong>Directed By:</strong> ${movieJSON.directors
+    .map((dir) => `${dir}`)
+    .join(" ")}<br><br>
+    <p>${movieJSON.fullplot ? movies.fullplot : 'N/A'}</p>
+  <strong>Cast:</strong> ${movieJSON.cast
+    .map((cas) => `${cas}`)
+    .join(", ")}<br><br>
+  <strong>Awards:</strong> ${movieJSON.awards.text}<br><br>
+  <strong>IMDB Rating:</strong> ${movieJSON.imdb.rating} (${
     movieJSON.imdb.votes
-  } votes)</p>`;
+  } votes)`;
 
   document.querySelector("#detailsModal .modal-body").innerHTML = modalData;
   let myModal = new bootstrap.Modal(document.getElementById("detailsModal"), {
@@ -87,3 +90,33 @@ function minutesToTime(time) {
   let hm = hours.toString().concat(":", minutes.toString());
   return hm;
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelector("#previousButton").addEventListener("click", () => {
+    if (page > 1) {
+      page--;
+      loadMovieData();
+    }
+  });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelector("#nextButton").addEventListener("click", () => {
+    page++;
+    loadMovieData();
+  });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelector('#submitButton').addEventListener('click', () => {
+    title = document.querySelector('#searchForm').value;
+    loadMovieData(title.toString());
+  });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelector("#clearForm").addEventListener('click', () => {
+    page = 1;
+    loadMovieData();
+  });
+});
