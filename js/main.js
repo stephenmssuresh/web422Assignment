@@ -1,3 +1,15 @@
+/*********************************************************************************
+*  WEB422 – Assignment 2
+*  I declare that this assignment is my own work in accordance with Seneca Academic Policy.  
+*  No part of this assignment has been copied manually or electronically from any other source
+*  (including web sites) or distributed to other students.
+* 
+*  Name: Stephen Suresh 
+Student ID: 117916213 
+Date: 2022-09-23
+
+********************************************************************************/ 
+
 var page = 1;
 var perPage = 10;
 var movieArr = []; //empty array to store all the movies from the fetch
@@ -63,7 +75,7 @@ function modalDisplay(movieJSON) {
   <strong>Directed By:</strong> ${movieJSON.directors
     .map((dir) => `${dir}`)
     .join(" ")}<br><br>
-    <p>${movieJSON.fullplot ? movies.fullplot : 'N/A'}</p>
+    <p>${movieJSON.fullplot ? movieJSON.fullplot : 'N/A'}</p>
   <strong>Cast:</strong> ${movieJSON.cast
     .map((cas) => `${cas}`)
     .join(", ")}<br><br>
@@ -110,6 +122,7 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
   document.querySelector('#submitButton').addEventListener('click', () => {
     title = document.querySelector('#searchForm').value;
+    // console.log('clicked submit');
     loadMovieData(title.toString());
   });
 });
@@ -117,6 +130,7 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
   document.querySelector("#clearForm").addEventListener('click', () => {
     page = 1;
+    // console.log('clicked clear');
     loadMovieData();
   });
 });
